@@ -16,3 +16,8 @@ def get_key():
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
+
+    # Game settings
+frame_size_x = 40
+frame_size_y = 20
+  
