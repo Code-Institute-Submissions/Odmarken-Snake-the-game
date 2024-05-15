@@ -105,3 +105,10 @@ while True:
         direction = "RIGHT"
     elif key == 'q':
         break
+
+ if not update_game():
+        print("Game Over!")
+        get_key()
+        break
+
+    time.sleep(0.1)
