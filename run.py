@@ -47,7 +47,7 @@ def init_vars():
         print()
     print(f'Score: {score}')
 
-    #updates
+    # Game button/directions
 
     def update_game():
     global food_spawn, score, food_pos  
