@@ -6,7 +6,6 @@ import tty
 import termios
 
 # Terminal settings for the game
-
 def get_key():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
@@ -17,11 +16,11 @@ def get_key():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-    # Game settings
+# Game settings
 frame_size_x = 40
 frame_size_y = 20
-  
-  # Variables
+
+# Variables
 def init_vars():
     global head_pos, snake_body, food_pos, food_spawn, score, direction
     direction = "RIGHT"
@@ -30,9 +29,9 @@ def init_vars():
     food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
     food_spawn = True
     score = 0
-    print(f'Initial food position: {food_pos}')  
+    print(f'Initial food position: {food_pos}')
 
-    def draw_game():
+def draw_game():
     os.system('clear')
     for y in range(frame_size_y):
         for x in range(frame_size_x):
@@ -47,10 +46,9 @@ def init_vars():
         print()
     print(f'Score: {score}')
 
-    # Game button/directions
-
-    def update_game():
-    global food_spawn, score, food_pos  
+# Game button/directions
+def update_game():
+    global food_spawn, score, food_pos
 
     if direction == "UP":
         head_pos[1] -= 1
@@ -60,7 +58,8 @@ def init_vars():
         head_pos[0] -= 1
     elif direction == "RIGHT":
         head_pos[0] += 1
-        if head_pos[0] < 0:
+
+    if head_pos[0] < 0:
         head_pos[0] = frame_size_x - 1
     elif head_pos[0] >= frame_size_x:
         head_pos[0] = 0
@@ -69,12 +68,12 @@ def init_vars():
     elif head_pos[1] >= frame_size_y:
         head_pos[1] = 0
 
-          # Food for snake
+    # Food for snake
     snake_body.insert(0, list(head_pos))
     if head_pos == food_pos:
         score += 1
         food_spawn = False
-        print(f'Eaten food at: {food_pos}') 
+        print(f'Eaten food at: {food_pos}')
     else:
         snake_body.pop()
 
@@ -82,15 +81,15 @@ def init_vars():
     if not food_spawn:
         food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
         food_spawn = True
-        print(f'Spawned new food at: {food_pos}')  
+        print(f'Spawned new food at: {food_pos}')
 
-    #  GAME OVER/Exit
+    # GAME OVER/Exit
     for block in snake_body[1:]:
         if head_pos == block:
             return False
     return True
 
-    # LOOPS
+# LOOPS
 init_vars()
 while True:
     draw_game()
@@ -106,7 +105,7 @@ while True:
     elif key == 'q':
         break
 
- if not update_game():
+    if not update_game():
         print("Game Over!")
         get_key()
         break
