@@ -27,3 +27,23 @@ def init_vars():
     direction = "RIGHT"
     head_pos = [10, 5]
     snake_body = [[10, 5]]
+     food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
+    food_spawn = True
+    score = 0
+    print(f'Initial food position: {food_pos}')  
+
+    def draw_game():
+    os.system('clear')
+    for y in range(frame_size_y):
+        for x in range(frame_size_x):
+            if [x, y] == head_pos:
+                print('O', end='')
+            elif [x, y] in snake_body:
+                print('o', end='')
+            elif [x, y] == food_pos:
+                print('*', end='')
+            else:
+                print(' ', end='')
+        print()
+    print(f'Score: {score}')
+
