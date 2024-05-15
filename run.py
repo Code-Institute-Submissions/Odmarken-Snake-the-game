@@ -89,3 +89,19 @@ def init_vars():
         if head_pos == block:
             return False
     return True
+
+    # LOOPS
+init_vars()
+while True:
+    draw_game()
+    key = get_key().lower()
+    if key == 'w' and direction != "DOWN":
+        direction = "UP"
+    elif key == 's' and direction != "UP":
+        direction = "DOWN"
+    elif key == 'a' and direction != "RIGHT":
+        direction = "LEFT"
+    elif key == 'd' and direction != "LEFT":
+        direction = "RIGHT"
+    elif key == 'q':
+        break
