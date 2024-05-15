@@ -21,3 +21,9 @@ def get_key():
 frame_size_x = 40
 frame_size_y = 20
   
+  # Variables
+def init_vars():
+    global head_pos, snake_body, food_pos, food_spawn, score, direction
+    direction = "RIGHT"
+    head_pos = [10, 5]
+    snake_body = [[10, 5]]
