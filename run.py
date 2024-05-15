@@ -47,3 +47,18 @@ def init_vars():
         print()
     print(f'Score: {score}')
 
+    #updates
+
+    def update_game():
+    global food_spawn, score, food_pos  
+
+    if direction == "UP":
+        head_pos[1] -= 1
+    elif direction == "DON":
+        head_pos[1] += 1
+    elif direction == "LEFT":
+        head_pos[0] -= 1
+    elif direction == "RIGHT":
+        head_pos[0] += 1
+
+
