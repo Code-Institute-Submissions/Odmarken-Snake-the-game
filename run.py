@@ -54,11 +54,28 @@ def init_vars():
 
     if direction == "UP":
         head_pos[1] -= 1
-    elif direction == "DON":
+    elif direction == "DOWN":
         head_pos[1] += 1
     elif direction == "LEFT":
         head_pos[0] -= 1
     elif direction == "RIGHT":
         head_pos[0] += 1
+        if head_pos[0] < 0:
+        head_pos[0] = frame_size_x - 1
+    elif head_pos[0] >= frame_size_x:
+        head_pos[0] = 0
+    elif head_pos[1] < 0:
+        head_pos[1] = frame_size_y - 1
+    elif head_pos[1] >= frame_size_y:
+        head_pos[1] = 0
+
+          # Food for snake
+    snake_body.insert(0, list(head_pos))
+    if head_pos == food_pos:
+        score += 1
+        food_spawn = False
+        print(f'Eaten food at: {food_pos}') 
+    else:
+        snake_body.pop()
 
 
