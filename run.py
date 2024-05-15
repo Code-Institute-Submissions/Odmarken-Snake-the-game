@@ -78,4 +78,14 @@ def init_vars():
     else:
         snake_body.pop()
 
+    # Food spawner
+    if not food_spawn:
+        food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
+        food_spawn = True
+        print(f'Spawned new food at: {food_pos}')  
 
+    #  GAME OVER/Exit
+    for block in snake_body[1:]:
+        if head_pos == block:
+            return False
+    return True
