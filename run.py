@@ -27,7 +27,7 @@ def init_vars():
     direction = "RIGHT"
     head_pos = [10, 5]
     snake_body = [[10, 5]]
-     food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
+    food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
     food_spawn = True
     score = 0
     print(f'Initial food position: {food_pos}')  
