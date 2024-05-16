@@ -6,13 +6,13 @@ import tty
 import termios
 import select
 
-# Terminal settings 
+# Terminal settings for non-blocking get_key function
 def get_key():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
         tty.setraw(sys.stdin.fileno())
-        if select.select([sys.stdin], [], [], 0)[0]:
+        if select.select([sys.stdin], [], [], 0.1)[0]:
             ch = sys.stdin.read(1)
         else:
             ch = None
@@ -26,8 +26,9 @@ frame_size_y = 20
 
 # Variables
 def init_vars():
-    global head_pos, snake_body, food_pos, food_spawn, score, direction
+    global head_pos, snake_body, food_pos, food_spawn, score, direction, change_to
     direction = "RIGHT"
+    change_to = direction
     head_pos = [10, 5]
     snake_body = [[10, 5]]
     food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
@@ -52,7 +53,17 @@ def draw_game():
 
 # Game button/directions
 def update_game():
-    global food_spawn, score, food_pos
+    global food_spawn, score, food_pos, direction
+
+    # Change direction
+    if change_to == "UP" and direction != "DOWN":
+        direction = "UP"
+    if change_to == "DOWN" and direction != "UP":
+        direction = "DOWN"
+    if change_to == "LEFT" and direction != "RIGHT":
+        direction = "LEFT"
+    if change_to == "RIGHT" and direction != "LEFT":
+        direction = "RIGHT"
 
     if direction == "UP":
         head_pos[1] -= 1
@@ -98,14 +109,14 @@ while True:
     key = get_key()
     if key:
         key = key.lower()
-        if key == 'w' and direction != "DOWN":
-            direction = "UP"
-        elif key == 's' and direction != "UP":
-            direction = "DOWN"
-        elif key == 'a' and direction != "RIGHT":
-            direction = "LEFT"
-        elif key == 'd' and direction != "LEFT":
-            direction = "RIGHT"
+        if key == 'w':
+            change_to = "UP"
+        elif key == 's':
+            change_to = "DOWN"
+        elif key == 'a':
+            change_to = "LEFT"
+        elif key == 'd':
+            change_to = "RIGHT"
         elif key == 'q':
             break
 
