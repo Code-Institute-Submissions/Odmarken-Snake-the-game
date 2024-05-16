@@ -4,14 +4,18 @@ import time
 import sys
 import tty
 import termios
+import select
 
-# Terminal settings for the game
+# Terminal settings 
 def get_key():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
         tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
+        if select.select([sys.stdin], [], [], 0)[0]:
+            ch = sys.stdin.read(1)
+        else:
+            ch = None
     finally:
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
@@ -59,55 +63,54 @@ def update_game():
     elif direction == "RIGHT":
         head_pos[0] += 1
 
+    # Wrap around
     if head_pos[0] < 0:
         head_pos[0] = frame_size_x - 1
     elif head_pos[0] >= frame_size_x:
         head_pos[0] = 0
-    elif head_pos[1] < 0:
+    if head_pos[1] < 0:
         head_pos[1] = frame_size_y - 1
     elif head_pos[1] >= frame_size_y:
         head_pos[1] = 0
 
-    # Food for snake
     snake_body.insert(0, list(head_pos))
     if head_pos == food_pos:
         score += 1
         food_spawn = False
-        print(f'Eaten food at: {food_pos}')
     else:
         snake_body.pop()
 
-    # Food spawner
     if not food_spawn:
         food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
         food_spawn = True
-        print(f'Spawned new food at: {food_pos}')
 
-    # GAME OVER/Exit
     for block in snake_body[1:]:
         if head_pos == block:
             return False
     return True
 
-# LOOPS
+# Initialize variables
 init_vars()
+
+# Main game loop
 while True:
     draw_game()
-    key = get_key().lower()
-    if key == 'w' and direction != "DOWN":
-        direction = "UP"
-    elif key == 's' and direction != "UP":
-        direction = "DOWN"
-    elif key == 'a' and direction != "RIGHT":
-        direction = "LEFT"
-    elif key == 'd' and direction != "LEFT":
-        direction = "RIGHT"
-    elif key == 'q':
-        break
+    key = get_key()
+    if key:
+        key = key.lower()
+        if key == 'w' and direction != "DOWN":
+            direction = "UP"
+        elif key == 's' and direction != "UP":
+            direction = "DOWN"
+        elif key == 'a' and direction != "RIGHT":
+            direction = "LEFT"
+        elif key == 'd' and direction != "LEFT":
+            direction = "RIGHT"
+        elif key == 'q':
+            break
 
     if not update_game():
         print("Game Over!")
-        get_key()
         break
 
     time.sleep(0.1)
