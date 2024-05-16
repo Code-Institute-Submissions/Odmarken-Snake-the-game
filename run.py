@@ -38,6 +38,8 @@ def init_vars():
 
 def draw_game():
     os.system('clear')
+    print("Press W, A, S, D to move the snake. Press Q to quit.")
+    print(f"Score: {score}")
     for y in range(frame_size_y):
         for x in range(frame_size_x):
             if [x, y] == head_pos:
@@ -49,7 +51,6 @@ def draw_game():
             else:
                 print(' ', end='')
         print()
-    print(f'Score: {score}')
 
 # Game button/directions
 def update_game():
