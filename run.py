@@ -6,7 +6,7 @@ import tty
 import termios
 import select
 
-# Terminal settings for non-blocking get_key function
+# Terminal settings 
 def get_key():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
