@@ -20,15 +20,45 @@ Enjoy playing Snake and see how long you can grow your snake while mastering the
 
 ### Existing Features
 
+- Snake Movement: The snake can be controlled using W, A, S, D keys for movement in respective directions.
+- Food Generation: Food appears at random positions on the screen, and eating food increases the snake's length.
+- Score Tracking: The game keeps track of the score, which increases every time the snake eats the food.
+- High Score: The game saves and displays the highest score achieved in a session.
+- Speed Control: Players can control the speed of the snake using the P (increase speed) and O (decrease speed) keys.
+- Game Over: The game ends when the snake collides with itself, and a "Game Over" message is displayed.
+- Start Screen: The game starts after pressing any key on the start screen.
+- Data Model
+
 ## Data Model
 
+- Snake: Represented by a list of coordinates where each segment of the snake resides.
+- Food: Represented by a single coordinate where the food is located.
+- Score: An integer value tracking the player's current score.
+- High Score: An integer value tracking the highest score achieved across sessions, stored in a text file.
+
 ## Testing
+
+### Manual Testing:
+
+- Verify snake movement using W, A, S, D keys.
+- Check food consumption and score increment.
+- Confirm the snake grows in length after eating food.
+- Test speed increase with P key and decrease with O key.
+- Ensure game over condition works when the snake collides with itself.
+- Validate high score is saved and loaded correctly localy.
 
 ## Bugs
 
 ### Solved Bugs
 
+1. Collision Detection: Initially, the snake would not always detect collisions correctly. This was fixed by ensuring the collision logic checks all segments of the snake's body.
+2. Speed Adjustment: There was an issue with the speed adjustment keys (P and O) not affecting the game's speed correctly. This was resolved by ensuring the speed variable updates were correctly applied in the game loop.
+3. Food Generation: The food sometimes spawned inside the snake. This was fixed by checking the food's position against the snake's body and regenerating it if necessary.
+
 ### Validators
+
+1. PEP8 Compliance: Code was checked using flake8 for PEP8 compliance to ensure readability and maintainability.
+2. Functionality Tests: All game functionalities were manually tested to confirm they work as expected.
 
 ## Deployment
 
