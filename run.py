@@ -20,6 +20,15 @@ def get_key():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
+# Cursor visibility functions
+def hide_cursor():
+    sys.stdout.write("\033[?25l")
+    sys.stdout.flush()
+
+def show_cursor():
+    sys.stdout.write("\033[?25h")
+    sys.stdout.flush()
+
 # Game settings
 frame_size_x = 40
 frame_size_y = 20
@@ -38,7 +47,6 @@ def init_vars():
 
 def draw_game():
     os.system('clear')
-    print("Press W, A, S, D to move the snake. Press Q to quit.")
     print(f"Score: {score}")
     for y in range(frame_size_y):
         for x in range(frame_size_x):
@@ -104,25 +112,38 @@ def update_game():
 # Initialize variables
 init_vars()
 
+# Print info text
+print("Press W, A, S, D to move the snake. Press Q to quit.")
+print("Press any key to start the game...")
+get_key()  # Wait for the user to press a key
+
+# Hide cursor
+hide_cursor()
+
 # Main game loop
-while True:
-    draw_game()
-    key = get_key()
-    if key:
-        key = key.lower()
-        if key == 'w':
-            change_to = "UP"
-        elif key == 's':
-            change_to = "DOWN"
-        elif key == 'a':
-            change_to = "LEFT"
-        elif key == 'd':
-            change_to = "RIGHT"
-        elif key == 'q':
+try:
+    while True:
+        draw_game()
+        key = get_key()
+        if key:
+            key = key.lower()
+            if key == 'w':
+                change_to = "UP"
+            elif key == 's':
+                change_to = "DOWN"
+            elif key == 'a':
+                change_to = "LEFT"
+            elif key == 'd':
+                change_to = "RIGHT"
+            elif key == 'q':
+                break
+
+        if not update_game():
+            print("Game Over!")
             break
 
-    if not update_game():
-        print("Game Over!")
-        break
-
-    time.sleep(0.1)
+        time.sleep(0.1)
+finally:
+    # Show cursor again
+    show_cursor()
+    print("\nCursor shown again. Exiting game.")
