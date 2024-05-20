@@ -1,6 +1,7 @@
 # Snake 
 
 [Deployed Game](https://snakethegame-c89237210006.herokuapp.com/)
+![Game](/images/game.png)
 
 ## How to Play
 
@@ -67,13 +68,17 @@ Enjoy playing Snake and see how long you can grow your snake while mastering the
 
 -   [Python 3.8.10](https://www.python.org/)
 
-### Validators
+## Validators
 
-1. PEP8 Compliance: Code was checked using flake8 for PEP8 compliance to ensure readability and maintainability.
+1. PEP8 CI Python Linter: Code was checked using PEP8 CI Python Linter
 2. Functionality Tests: All game functionalities were manually tested to confirm they work as expected.
-- [Python Validator](http://pep8online.com/)
+- [Python Validator](https://pep8ci.herokuapp.com/)
 - result for `run.py`
+![Lighthouse](/images/ci.png)
 
+### Lighthouse
+
+![Lighthouse](/images/lighthouse.png)
 
 ## Deployment
 
@@ -90,3 +95,8 @@ The requirements.txt file in the IDE must be updated to package all dependencies
     1. Deployment will configure and give you a viewable link
 
 ## Credits
+
+- My Mentor Brian 
+- CI Slack group Sweden have been amazing and super helpful
+- Weekly huddles in Community Sweden slack group
+- [Youtube](https://www.youtube.com/watch?v=kqtD5dpn9C8&t=580s) Watched all of his Python videos to understand even more in Python
