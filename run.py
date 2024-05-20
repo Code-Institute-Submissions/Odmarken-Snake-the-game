@@ -7,11 +7,12 @@ import termios
 import select
 
 # Terminal settings 
+
 def get_key():
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
-        tty.setraw(sys.stdin.fileno())
+        tty.setraw(fd)
         if select.select([sys.stdin], [], [], 0.1)[0]:
             ch = sys.stdin.read(1)
         else:
@@ -21,6 +22,7 @@ def get_key():
     return ch
 
 # Cursor visibility functions
+
 def hide_cursor():
     sys.stdout.write("\033[?25l")
     sys.stdout.flush()
@@ -30,23 +32,29 @@ def show_cursor():
     sys.stdout.flush()
 
 # Game settings
+
 frame_size_x = 40
 frame_size_y = 20
 
 # Variables
+
 def init_vars():
-    global head_pos, snake_body, food_pos, food_spawn, score, direction, change_to
+    global head_pos, snake_body, food_pos, food_spawn, score, direction, speed
     direction = "RIGHT"
-    change_to = direction
     head_pos = [10, 5]
     snake_body = [[10, 5]]
     food_pos = [random.randrange(1, frame_size_x), random.randrange(1, frame_size_y)]
     food_spawn = True
     score = 0
+    speed = 0.1
     print(f'Initial food position: {food_pos}')
+
+# Game info 
 
 def draw_game():
     os.system('clear')
+    print("Press W, A, S, D to move the snake. Press Q to quit.")
+    print("Press P to make the game faster, O to make it slower.")
     print(f"Score: {score}")
     for y in range(frame_size_y):
         for x in range(frame_size_x):
@@ -61,18 +69,9 @@ def draw_game():
         print()
 
 # Game button/directions
+
 def update_game():
     global food_spawn, score, food_pos, direction
-
-    # Change direction
-    if change_to == "UP" and direction != "DOWN":
-        direction = "UP"
-    if change_to == "DOWN" and direction != "UP":
-        direction = "DOWN"
-    if change_to == "LEFT" and direction != "RIGHT":
-        direction = "LEFT"
-    if change_to == "RIGHT" and direction != "LEFT":
-        direction = "RIGHT"
 
     if direction == "UP":
         head_pos[1] -= 1
@@ -84,6 +83,7 @@ def update_game():
         head_pos[0] += 1
 
     # Wrap around
+
     if head_pos[0] < 0:
         head_pos[0] = frame_size_x - 1
     elif head_pos[0] >= frame_size_x:
@@ -110,40 +110,50 @@ def update_game():
     return True
 
 # Initialize variables
+
 init_vars()
 
 # Print info text
+
 print("Press W, A, S, D to move the snake. Press Q to quit.")
+print("Press P to make the game faster, O to make it slower.")
 print("Press any key to start the game...")
-get_key()  # Wait for the user to press a key
+get_key()  
 
 # Hide cursor
+
 hide_cursor()
 
 # Main game loop
+
 try:
     while True:
         draw_game()
         key = get_key()
         if key:
             key = key.lower()
-            if key == 'w':
-                change_to = "UP"
-            elif key == 's':
-                change_to = "DOWN"
-            elif key == 'a':
-                change_to = "LEFT"
-            elif key == 'd':
-                change_to = "RIGHT"
+            if key == 'w' and direction != "DOWN":
+                direction = "UP"
+            elif key == 's' and direction != "UP":
+                direction = "DOWN"
+            elif key == 'a' and direction != "RIGHT":
+                direction = "LEFT"
+            elif key == 'd' and direction != "LEFT":
+                direction = "RIGHT"
             elif key == 'q':
                 break
+            elif key == 'p':
+                speed = max(0.01, speed - 0.01)  # Increase speed, minimum 0.01
+            elif key == 'o':
+                speed += 0.01  # Decrease speed
 
         if not update_game():
             print("Game Over!")
             break
 
-        time.sleep(0.1)
+        time.sleep(speed)
 finally:
     # Show cursor again
+
     show_cursor()
     print("\nCursor shown again. Exiting game.")
