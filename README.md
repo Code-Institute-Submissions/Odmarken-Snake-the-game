@@ -1,7 +1,6 @@
 # Snake 
 
 [Deployed Game](https://snakethegame-c89237210006.herokuapp.com/)
-![Game](/images/game.png)
 
 ## How to Play
 
@@ -31,6 +30,8 @@ Enjoy playing Snake and see how long you can grow your snake while mastering the
 - Data Model
 
 ## Data Model
+
+![Game](/images/game.png)
 
 - Snake: Represented by a list of coordinates where each segment of the snake resides.
 - Food: Represented by a single coordinate where the food is located.
@@ -82,21 +83,26 @@ Enjoy playing Snake and see how long you can grow your snake while mastering the
 
 ## Deployment
 
-The requirements.txt file in the IDE must be updated to package all dependencies. To do this:
-    1. Enter the following into the terminal: 'pip3 freeze > requirements.txt'
-    1. Commit the changes and push to GitHub
+- The requirements.txt file in the IDE must be updated to package all dependencies. To do this:
+- Enter the following into the terminal: 'pip3 freeze > requirements.txt'
+- Commit the changes and push to GitHub
 
 * Next, follow the steps below:
     1. Login to [Heroku](https://heroku.com/)
-    1. Once at your Dashboard, click 'Create New App'
-    1. Enter a name for your application, this must be unique, and select a region
-    1. Click 'Create App'
-    1. At the Application Configuration page, apply the following to the Settings and Deploy sections:
-    1. Deployment will configure and give you a viewable link
+    2. Once at your Dashboard, click 'Create New App'
+    3. Enter a name for your application, this must be unique, and select a region
+    4. Click 'Create App'
+    5. At the Application Configuration page, apply the following to the Settings and Deploy sections:
+    6. Deployment will configure and give you a viewable link
 
 ## Credits
 
 - My Mentor Brian 
-- CI Slack group Sweden have been amazing and super helpful
+- CI Slack group Sweden have been amazing and super helpful [Slack](https://app.slack.com/client/T0L30B202/C03J2BCURV3)
 - Weekly huddles in Community Sweden slack group
-- [Youtube](https://www.youtube.com/watch?v=kqtD5dpn9C8&t=580s) Watched all of his Python videos to understand even more in Python
+- [Youtube Mosh](https://www.youtube.com/watch?v=kqtD5dpn9C8&t=580s) Watched all of his Python videos to understand even more in Python
+
+### Acknowledgements
+
+- I want to give a huge thanks to my mentor, Brian, for diving deep with me into some of the issues I had and also for sharing some tricks to make the code look better.
+
