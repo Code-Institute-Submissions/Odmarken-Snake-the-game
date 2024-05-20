@@ -10,22 +10,27 @@ import select
 FRAME_SIZE_X = 40
 FRAME_SIZE_Y = 20
 HIGH_SCORE_FILE = "highscore.txt"
-INITIAL_SPEED = 0.1
+INITIAL_SPEED = 0.05  # Double the normal speed
 
 # Initial variables for the game state
 direction = "RIGHT"
 head_pos = [10, 5]
 snake_body = [[10, 5]]
-food_pos = [random.randrange(1, FRAME_SIZE_X), random.randrange(1, FRAME_SIZE_Y)]
+food_pos = [
+    random.randrange(1, FRAME_SIZE_X),
+    random.randrange(1, FRAME_SIZE_Y)
+]
 food_spawn = True
 score = 0
 speed = INITIAL_SPEED
 high_score = 0
 
+
 def get_key():
     """
     Get a single key press from the user.
-    This function sets the terminal to raw mode to capture a single key press without waiting for a newline.
+    This function sets the terminal to raw mode to capture a single key press
+    without waiting for a newline.
     """
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
@@ -39,6 +44,7 @@ def get_key():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
+
 def hide_cursor():
     """
     Hide the cursor in the terminal.
@@ -46,6 +52,7 @@ def hide_cursor():
     """
     sys.stdout.write("\033[?25l")
     sys.stdout.flush()
+
 
 def show_cursor():
     """
@@ -55,9 +62,10 @@ def show_cursor():
     sys.stdout.write("\033[?25h")
     sys.stdout.flush()
 
+
 def load_high_score():
     """
-    Load the high score from a file.
+    Load the high score from local.
     This function reads the high score from the specified file if it exists.
     """
     if os.path.exists(HIGH_SCORE_FILE):
@@ -65,29 +73,36 @@ def load_high_score():
             return int(file.read().strip())
     return 0
 
+
 def save_high_score(score):
     """
-    Save the high score to a file.
+    Save the high score to local.
     This function writes the current high score to the specified file.
     """
     with open(HIGH_SCORE_FILE, "w") as file:
         file.write(str(score))
+
 
 def init_vars():
     """
     Initialize game variables.
     This function sets up the initial state of the game.
     """
-    global head_pos, snake_body, food_pos, food_spawn, score, direction, speed, high_score
+    global head_pos, snake_body, food_pos, food_spawn, score, direction, speed
+    global high_score
     direction = "RIGHT"
     head_pos = [10, 5]
     snake_body = [[10, 5]]
-    food_pos = [random.randrange(1, FRAME_SIZE_X), random.randrange(1, FRAME_SIZE_Y)]
+    food_pos = [
+        random.randrange(1, FRAME_SIZE_X), 
+        random.randrange(1, FRAME_SIZE_Y)
+    ]
     food_spawn = True
     score = 0
     speed = INITIAL_SPEED
     high_score = load_high_score()
     print(f'Initial food position: {food_pos}')
+
 
 def draw_game():
     """
@@ -110,10 +125,12 @@ def draw_game():
                 print(' ', end='')
         print()
 
+
 def update_game():
     """
     Update the game state.
-    This function moves the snake, checks for collisions, updates the score, and manages food spawning.
+    This function moves the snake, checks for collisions, updates the score,
+    and manages food spawning.
     """
     global food_spawn, score, food_pos, direction, high_score
 
@@ -144,7 +161,10 @@ def update_game():
         snake_body.pop()
 
     if not food_spawn:
-        food_pos = [random.randrange(1, FRAME_SIZE_X), random.randrange(1, FRAME_SIZE_Y)]
+        food_pos = [
+            random.randrange(1, FRAME_SIZE_X),
+            random.randrange(1, FRAME_SIZE_Y)
+        ]
         food_spawn = True
 
     # Check for collision with self
@@ -159,10 +179,12 @@ def update_game():
 
     return True
 
+
 def handle_input():
     """
     Handle user input.
-    This function captures user input and updates the direction and speed of the snake.
+    This function captures user input and updates the direction and speed of
+    the snake.
     """
     global direction, speed
     key = get_key()
@@ -184,10 +206,12 @@ def handle_input():
             speed += 0.01  # Decrease speed
     return True
 
+
 def main_game_loop():
     """
     Main game loop.
-    This function runs the main loop of the game, handling input, updating the game state, and rendering the game.
+    This function runs the main loop of the game, handling input, updating the
+    game state, and rendering the game.
     """
     while True:
         draw_game()
@@ -197,6 +221,7 @@ def main_game_loop():
             print("Game Over!")
             break
         time.sleep(speed)
+
 
 # Main execution
 if __name__ == "__main__":
