@@ -4,7 +4,7 @@
 
 ## How to Play
 
-In the classic game Snake, your objective is to control a snake and guide it to eat the food that appears on the screen. Each time the snake eats the food, it grows longer. The challenge is to keep the snake from crashing into itself, as the game will end if either happens.
+In the classic game Snake, your objective is to control a snake and guide it to eat the food that appears on the screen. Each time the snake eats the food, it grows longer. The challenge is to keep the snake from crashing into itself, as the game will end if that happens.
 
 To control the snake, you can use the arrow keys or the W, A, S, D keys on your keyboard.
 
@@ -12,7 +12,7 @@ The game starts when you press the designated start key or button. As you naviga
 
 Additionally, you can control the speed of the snake. Press the P key to increase the speed, making the game more challenging, or press the O key to decrease the speed if you need more time to plan your moves.
 
-Be strategic with your movements to avoid trapping yourself, and keep an eye on the entire length of the snake to prevent accidental collisions. The game ends when the snake crashes into the walls or itself, but you can always restart and try to beat your previous high score.
+Be strategic with your movements to avoid trapping yourself, and keep an eye on the entire length of the snake to prevent accidental collisions. The game ends when the snake crashes into itself, but you can always restart and try to beat your previous high score.
 
 Enjoy playing Snake and see how long you can grow your snake while mastering the controls and speed adjustments!
 
