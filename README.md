@@ -55,10 +55,25 @@ Enjoy playing Snake and see how long you can grow your snake while mastering the
 2. Speed Adjustment: There was an issue with the speed adjustment keys (P and O) not affecting the game's speed correctly. This was resolved by ensuring the speed variable updates were correctly applied in the game loop.
 3. Food Generation: The food sometimes spawned inside the snake. This was fixed by checking the food's position against the snake's body and regenerating it if necessary.
 
+## Technologies Used
+
+-   [gspread:](https://docs.gspread.org/en/latest/) Python API for Google Sheets
+-   [Git:](https://git-scm.com/) Gitpod terminal to commit to Git and Push to GitHub.
+-   [GitHub:](https://github.com/) Projects code after being pushed from Git.
+-   [Heroku:](https://heroku.com) is for python projects
+
+
+### Languages Used
+
+-   [Python 3.8.10](https://www.python.org/)
+
 ### Validators
 
 1. PEP8 Compliance: Code was checked using flake8 for PEP8 compliance to ensure readability and maintainability.
 2. Functionality Tests: All game functionalities were manually tested to confirm they work as expected.
+- [Python Validator](http://pep8online.com/)
+- result for `run.py`
+
 
 ## Deployment
 
